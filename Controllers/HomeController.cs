@@ -55,10 +55,10 @@ namespace WebApplication12.Controllers
 
         // Home page shows list of items.
         // Item price is set through the ViewBag.
-        public IActionResult Confirmation(string confirmationId)
+        public IActionResult Confirmation(string paymentID)
         {
             IPN transaction =
-            _context.IPNs.FirstOrDefault(t => t.paymentID == confirmationId);
+            _context.IPNs.FirstOrDefault(t => t.paymentID == paymentID);
 
             return View("Confirmation", transaction);
         }

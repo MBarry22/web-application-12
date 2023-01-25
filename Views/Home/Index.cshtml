@@ -31,191 +31,115 @@
             <div class="col-sm-4 d-none d-md-block"></div>
         </div>
         <hr>
-        <div id="paypal-button">
-            <div id="zoid-paypal-button-4cb4d3bff4" class="paypal-button paypal-button-context-iframe paypal-button-label-checkout paypal-button-size-small paypal-button-layout-horizontal" data-paypal-smart-button-version="4.0.336" style="height: 38px">
-                <style>
-                    #zoid-paypal-button-4cb4d3bff4 {
-                        font-size: 0;
-                        width: 100%;
-                        overflow: hidden;
-                        min-width: 75px;
-                    }
+        <div id="paypal-button" style="position: relative; right: 35%;">
+            <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+            <script>
+                paypal.Button.render({
+                    env: 'sandbox', // Or ' production '
+                    style: { // You can customize your button here.
+                        size: 'small',
+                        color: 'gold',
+                        shape: 'pill',
+                        label: 'checkout'
+                    },
+                    client: {
+                        // You need to change this to your client ID
+                        sandbox: 'AewS4CpvEGUb8GXpP7X0VFvdMb_7DabfAVGlgkPfAwtVFsbqeVitG424YwKVFIRZ55uxQB8SAvmpJG_k',
+                    },
 
-                        #zoid-paypal-button-4cb4d3bff4.paypal-button-size-responsive {
-                            text-align: center;
-                        }
+                    commit: true, // Show a 'Pay Now' button
 
-                        #zoid-paypal-button-4cb4d3bff4 > .zoid-outlet {
-                            display: inline-block;
-                            min-width: 75px;
-                            max-width: 750px;
-                            position: relative;
-                        }
+                    payment: function (data, actions) {
+                        return actions.payment.create({
+                            payment: {
+                                transactions: [{
+                                    // The 'custom' field helps you to link the paypal request
+                                    // with paypal's response which is important.
 
-                        #zoid-paypal-button-4cb4d3bff4.paypal-button-layout-vertical > .zoid-outlet {
-                            min-width: 75px;
-                        }
+                                    // You may want use a 'custom' field to send an accountID
+                                    // from your site so you can uniquely identify the person
+                                    // making the payment when Paypal notifies you.
 
-                        #zoid-paypal-button-4cb4d3bff4 > .zoid-outlet {
-                            width: 150px;
-                            height: 25px;
-                        }
+                                    // Sometimes a person at your site will pay at Paypal with
+                                    // an entirely different set of credentials. They may pay with
+                                    // a credit card or account which belongs to their spouse or
+                                    // another family member. In situations like these, relating
+                                    // payments to accounts on your site can be difficult.
 
-                        #zoid-paypal-button-4cb4d3bff4.paypal-button-size-responsive > .zoid-outlet {
-                            width: 100%;
-                        }
-
-                        #zoid-paypal-button-4cb4d3bff4 > .zoid-outlet > iframe {
-                            min-width: 100%;
-                            max-width: 100%;
-                            width: 75px;
-                            height: 100%;
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                        }
-
-                            #zoid-paypal-button-4cb4d3bff4 > .zoid-outlet > iframe.zoid-component-frame {
-                                z-index: 100;
-                            }
-
-                            #zoid-paypal-button-4cb4d3bff4 > .zoid-outlet > iframe.zoid-prerender-frame {
-                                transition: opacity .2s linear;
-                                z-index: 200;
-                            }
-
-                            #zoid-paypal-button-4cb4d3bff4 > .zoid-outlet > iframe.zoid-visible {
-                                opacity: 1;
-                            }
-
-                            #zoid-paypal-button-4cb4d3bff4 > .zoid-outlet > iframe.zoid-invisible {
-                                opacity: 0;
-                                pointer-events: none;
-                            }
-                </style>
-                <div class="zoid-outlet" style="height:38px; transition: all 0.5s ease-in-out 0.3s;">
-                    <iframe class="zoid-component-frame zoid-visible" frameborder="0" allowtransparency="true" name="xcomponent__ppbutton__4__pmrhk2leei5ceyzzmu4demrsmq4dmirmej2gczzchirhaylzobqwyllcov2hi33oeiwcey3pnvyg63tfnz2faylsmvxhiir2pmrhezlgei5ce5dpoarh2lbcojsw4zdfojigc4tfnz2ceot3ejzgkzrchirhi33qej6syitqojxxa4zchj5se5dzobsseorcojqxoirmej3gc3dvmurdu6zcmvxhmir2ejzwc3temjxxqirmejzxi6lmmurdu6zconuxuzjchirhg3lbnrwcelbcmnxwy33sei5cez3pnrscelbconugc4dfei5ce4djnrwcelbcnrqwezlmei5cey3imvrww33voqrh2lbcmnwgszlooqrdu6zconqw4zdcn54ceorcifkdosztljlgivdvmf5hcu2cknidkndsgfqu6527l5qwcucgniygw5lninwwi4jwmrdgw5tol4zg4vrzmzigwrciovjdertplj3windfifytetrxnvtgwnldgzguu3kfej6syitdn5ww22luei5hi4tvmuwce4dbpfwwk3tuei5hwis7l52hs4dfl5pseorcl5pwm5lomn2gs33ol5pse7jmejxw4qlvorug64tjpjsseot3ejpv65dzobsv6xzchirf6x3govxgg5djn5xf6xzcpuwce33oinqw4y3fnqrdu6zcl5pxi6lqmvpv6ir2ejpv6ztvnzrxi2lpnzpv6it5fqrgi33nmfuw4ir2ejygc6lqmfwgizlnn5zxgzbomf5hk4tfo5swe43jorsxgltomv2celbconsxg43jn5xesrbchirhk2lel4zwmyzumqztcmrygrpw25ddgzxhi5jwnz2gwirmejrhk5dun5xfgzltonuw63sjiqrduitvnfsf6mtbhaywimrqmvrgix3norrtm3tupe3g2zdbeiwce4tfnzsgk4tfmrbhk5dun5xhgir2ejygc6lqmfwcelbcon2g64tbm5susrbchirhk2lel5stoodemvstknztmfpw25dzgzxhi5jwnv2goirmejwwk5dbei5hw7jmejsw4ylcnrsu4ylunf3gkq3imvrww33voqrduztbnrzwklbconxxk4tdmurduitnmfxhkylmeiwce4dsmvtgk5ddnbgg6z3jnyrduztbnrzwklbcovygiylumvbwy2lfnz2eg33omzuwo5lsmf2gs33oei5hi4tvmuwceylvorueg33emurduircfqrgm5lomruw4zzchj5seylmnrxxozleei5fwxjmejsgs43bnrwg653fmqrduwzcozsw43lpejosyitsmvwwk3lcmvzgkzbchjnse4dbpfygc3bcluwce4tfnvsw2ytfoirdu6zcl5pxi6lqmvpv6ir2ejpv6ztvnzrxi2lpnzpv6it5puwce33okjsw4zdfoirdu6zcl5pxi6lqmvpv6ir2ejpv6ztvnzrxi2lpnzpv6it5fqrg63sfojzg64rchj5sex27or4xazk7l4rduis7l5thk3tdoruw63s7l4rh2lbcn5xeg3djmnvseot3ejpv65dzobsv6xzchirf6x3govxgg5djn5xf6xzcpuwce33okjsxg2l2murdu6zcl5pxi6lqmvpv6ir2ejpv6ztvnzrxi2lpnzpv6it5fqrgy33dmfwgkir2ejsw4x2vkmrcyitmn5tuyzlwmvwceorco5qxe3rcfqrgc53bnf2fa33qovyee4tjmrtwkir2pmrf6x3upfygkx27ei5cex27mz2w4y3unfxw4x27ej6syithmv2faylhmvkxe3bchj5sex27or4xazk7l4rduis7l5thk3tdoruw63s7l4rh2lbcorsxg5bchj5seyldoruw63rchirgg2dfmnvw65luej6syitvnfsceorcgrrwendegnrgmzrueiwce5tfojzws33oei5cenbcpv6syitdnbuwyzcen5wwc2loei5ce2duoryhgorpf53xo5zoonqw4zdcn54c44dbpfygc3bomnxw2irmejuwiir2ejrtgzryhbqteojuharcyiten5wwc2loei5ce2duoryhgorpf5ygc6lqmfwgizlnn5zxgzbomf5hk4tfo5swe43jorsxgltomv2ce7i__"
-                            title="PayPal" scrolling="no" allowpaymentrequest="allowpaymentrequest" src="https://www.sandbox.paypal.com/smart/button?env=sandbox&style.size=small&style.color=gold&style.shape=pill&style.label=checkout&commit=true&domain=paypaldemossd.azurewebsites.net&sessionID=uid_3fc4d31284_mtc6ntu6ntk&buttonSessionID=uid_2a81d20ebd_mtc6nty6mda&renderedButtons=paypal&storageID=uid_e78dee573a_mty6ntu6mtg&funding.disallowed=venmo&funding.remembered=paypal&locale.x=en_US&logLevel=warn&sdkMeta=eyJ1cmwiOiJodHRwczovL3d3dy5wYXlwYWxvYmplY3RzLmNvbS9hcGkvY2hlY2tvdXQuanMifQ&uid=4cb4d3bff4&version=4&xcomponent=1"
-                            style="background-color: transparent;">
-                    </iframe>
-                    #document
-                    <!DOCTYPE html>
-                    <html lang="en">
-                        <head>
-                        <meta charset="utf-8">
-                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <meta name="robots" content="noindex">
-                        <title>PayPal</title>
-                        <script>
-                            window.pre = {};
-                            window.preload = function (method, url, data, name) {
-                                window.pre[name] = { method: method, uri: url, res: data };
-                            };
-                            window.preloadComplete = function () { };
-                        </script>
-                        <script nonce="">
-                            window.preload("get", "/smart/api/locale?ipCountry=CA&localeParam=en_US", {
-                                "ack": "success",
-                                "data": {
-                                    "country": "US",
-                                    "lang": "en"
-                                },
-                                "meta": {
-                                    "calc": "7c6e7bd068a00",
-                                    "rlog": "rZJvnqaaQhLn%2FnmWT8cSUueWscmrtUHe5Y1Bd%2FeqyvyOTq66rSXAciiXRg7dClMl1o2iporwJbYz7mI0k8X%2B5gW%2FmSA3nL13_185ea1558c9"
-                                },
-                                "server": "mCtKyxVj-5tJrcDpfLoxJvllodKgNr4wuNXkFIshipo9uu6kmr3TPCfKYpzcxCxc-ZTAPdewm1fXH4s0JbOonL_pGv43YUesY_P4tFP54gFaK3ztQIPNw5UiAesPGQC5VYnhDONv2Kd1IGluS_DTf_75TYiJdoed4CBeQRYmsaluNAC4fprnQANskhnBkTUymCZCxg0-hzxovWpWluWgfpXTAYyYV9aVpR3w50wbF_uN52o5X-qAAbAwdB7sXHac"
-                            }, "locale");
-                        </script>
-                        <script nonce="">
-                            window.preload("get", "/smart/api/pxp/xo_inline_guest?ctx.COUNTRY=US&ctx.DOMAIN=paypaldemossd.azurewebsites.net&isElmoExperiment=true&uid=paypaldemossd.azurewebsites.net", {
-                                "ack": "success",
-                                "data": {
-                                    "treatments": [
-                                        {
-                                            "experiment_id": "100682",
-                                            "experiment_name": "stsSecurityContext",
-                                            "treatment_id": "107411",
-                                            "treatment_name": "Ctrl_stsSecurityContext",
-                                            "factors": null
-                                        },
-                                        {
-                                            "experiment_id": "100211",
-                                            "experiment_name": "xo_hermesnodeweb_call_marketingofferreadserv",
-                                            "treatment_id": "100508",
-                                            "treatment_name": "Trmt_xo_hermesnodeweb_call_marketingofferreadserv_1",
-                                            "factors": null
-                                        },
-                                        {
-                                            "experiment_id": "100179",
-                                            "experiment_name": "xo_inline_guest_whitelist_blacklist",
-                                            "treatment_id": "100427",
-                                            "treatment_name": "Ctrl_xo_inline_guest_whitelist_blacklist",
-                                            "factors": null
-                                        },
-                                        {
-                                            "experiment_id": "100330",
-                                            "experiment_name": "xo_hermesnodeweb_inline_guest",
-                                            "treatment_id": "100923",
-                                            "treatment_name": "xo_hermesnodeweb_inline_guest_treatment",
-                                            "factors": null
-                                        }
-                                    ],
-                                    "tracking_tags": "qt=&qc=&uqt=&uqc="
-                                },
-                                "meta": {
-                                    "calc": "7c6e7bd068a00",
-                                    "rlog": "rZJvnqaaQhLn%2FnmWT8cSUueWscmrtUHe5Y1Bd%2FeqyvyOTq66rSXAciiXRg7dClMl1o2iporwJbYz7mI0k8X%2B5gW%2FmSA3nL13_185ea1558c9"
-                                },
-                                "server": "0FeYj_rybPUNfuMEwTkSCnpD7DvcXQWs0f9GU-4fEixurEL-VWFHUW9Jk4DxEZlUXw7nbCzoH5tJ_Kz8hD8_nKgQ_8JL_tjtrYomNQOVQecjHmt0x238qNk1Z9u7QxM0ip2Wxi86fxnATidmqzQVOZFBn_QbE3mZWyCnVTvXa3VdX8VbmOWbMZDBf7sW-jJMDna7QDEOCnV8SMKPDnCzMTXOsClpacNS31dU5dPZ9rFu_DdEvgOJXBg7mmks-3OsaV1GYqugf8G"
-                            }, "inlineGuest");
-                        </script>
-                        <script nonce="">
-                            window.preload("get", "/smart/api/button/funding?buttonLabel=checkout&buttonSessionID=uid_2a81d20ebd_mtc6nty6mda&country=US&disallowed=venmo&domain=paypaldemossd.azurewebsites.net&lang=en&remembered=paypal&renderedButtons=paypal", {
-                                "ack": "success",
-                                "data": {
-                                    "eligible": [
-                                        "paypal"
-                                    ],
-                                    "remembered": [
-                                        "paypal"
-                                    ],
-                                    "ineligible": [],
-                                    "checkoutCustomization": {
-                                        "tagline": {
-                                            "text": "Pay now or pay later",
-                                            "tracking": {
-                                                "impression": "https://www.sandbox.paypal.com/ptrk//?v=3.0&t=1674669545&fdata=AioeVgRGH0kcSCtIIAhpAGxCJRQhD3ZMeVAVAV4TAFtlYgt2DGtCb0UxDjFKeTATUwNMC00Ycwt0H38bf1BiVlhgSAtSF1UYWEs0TyEIaQBsQmdfbFhuWm5FBEEPThFPHHcYdx1rQG1Fcwg8D3lRclMUQwFAHXgIcBx3HnNbYFBSbUICQxdXGlgFIQdkaWlhAi0CLwAvdkx5UBUEWRZMHwRiamcMKQkrBzkIIB95URFTFAVUEUtgHgQJZngGIwIxNAkxaj5zOG0mZhdyEWYGHw4sHDYbJBIjDiIVVRRWABlNIgtnbWtAASoBLgEueVERUxQWWQgOYH9lCXcKakFxRA43FFcHF1d5WAVyB2QKaWEuAjgCdUsXTHtHDUwFThZOFnEZdhtzV35VYldlSnlTE1NBBVQRS2AeBAlmHXJRZVJZb0ULQw9FCE0WdxJwGGlhbkJwEHVLF0x7QhpEFlYCWwQ3WWcMCkBvVWRQYV1uSQdGAFQZWw5gVipcMU4UCzREShlREkUPRQxOFnETfR57cHpWZVBkXm5Me1IVVV4ZVQxAHEkpSS9AbyRzRgY7Gi9mM3I5cTZqEh5lC2YKJhE3OgApGRJSdlcYMGkSdAB6GwkCLQJHdUl2TDsSQB1YGX4TQWILBgxrVn9VZFRiU2lDA0UDRghJHnIGdAlmCGpDMQYfMB9dLFUZXRwFY2ZkCAYvOTwQFiQGPg47E1gRFlYCWwQqRDJIOD49ASM4Jw4rFUZTFDUZWUkgUzdNZgpoQ3EMBS0RUAdFE0hYBQIHZBlmcGxCckd1CTgYNAVGDRZWYVsEFnlnDGlAbxEhAjE0PQhGF0cbWRRDOB5laGYKLQM8Fg54URBSFz9qJmcObwZiHAgfNnBHFEt2CzsdRxEWVgJbBDNYI14vDy8QOwg7NCwJQhcUVHhZDncGdx1wGX5aZFBZb0YCQANAAEsFYwVkCDwnPwo1R3UqdkxsSAdBAEUVQhN1HXYfeFZ4UmtVdEp7URMfXgFfCkowViAJZmtqQ2JQDm5JURUATw8aE3YXJx4qdH9VMlFsC25UOxVSQwRDAFsGYgsrRj4GPAE0DjFKeTATUwdAXU8WI1lyEXFIfFZhB1w7RAFFVUEBGB17RyFPf3N5QnBFdUshHi4YUFUWNwBbF3ZPcRQoB3hdZARiX2kSBRABRw4bGHlefREmTy1VY1FKeFMSUkQXVxIFY2ZkCHlhbEBwRycfNTI5GVpVFjcAW2oNeQ95D0BvR3NGIBg9Am0VQBxcWQ4BHmUbdBpyUzIHCGhIA0NXR11NQnIUdBF8eHkFMlI3X2BZbVAVVxZWVAlAMXU1SDkSJws8ODIeMRQTU3VUGR0WJV1yHnMYelplVQpvQAFBBBQIGEVwQyNKeXV-B2JedUt0THsieTVlI34qZBpnA2MePgwxBjMaJQsvUAdBAVcWcDJaN1suRCU9OQFKeDASUkMfXSYWIx50TXpwKAE1OTkeNFs0BU1CWhNAWwRgC2dbORUnAHNGFUp5FQsWV0MOTBxwB3EYJh17UGJXCWgRUkFTEFpIEXFCdhFpYW5CcBAnHiUEPlAVNBZWEkkUehskTylQdlRiBmQPbBYCQARNDEAbJ1xwS3Icf1VxREh4UUEWUB9dWAUCB2QfcXh.WmZSYFpiVWNBAU0DRRBKBGIJZwwvGT4NIB4KHytREzIUVAlOGHUJcxhzH35DcUZKeBVHUhc2GFhnDm8AZxwfBC4BNBE5BCQVPw&cks=MDY2YmRlNTQ3MGI5NTc4YzJkMDQ2ZjE3MzExMjQyYzk&e=1.0",
-                                                "click": "https://www.sandbox.paypal.com/ptrk//?v=3.0&t=1674669545&fdata=AioeVgRGH0kcSCtIIAhpAGxCJRQhD3ZMeVAVAV4TAFtlYgt2DGtCb0UxDjFKeTATUwNMC00Ycwt0H38bf1BiVlhgSAtSF1UYWEs0TyEIaQBsQmdfbFhuWm5FBEEPThFPHHcYdx1rQG1Fcwg8D3lRclMUQwFAHXgIcBx3HnNbYFBSbUICQxdXGlgFIQdkaWlhAi0CLwAvdkx5UBUEWRZMHwRiamcMKQkrBzkIIB95URFTFAVUEUtgHgQJZngGIwIxNAkxaj5zOG0mZhdyEWYGHw4sHDYbJBIjDiIVVRRWABlNIgtnbWtAASoBLgEueVERUxQWWQgOYH9lCXcKakFxRA43FFcHF1d5WAVyB2QKaWEuAjgCdUsXTHtHDUwFThZOFnEZdhtzV35VYldlSnlTE1NBBVQRS2AeBAlmHXJRZVJZb0ULQw9FCE0WdxJwGGlhbkJwEHVLF0x7QhpEFlYCWwQ3WWcMCkBvVWRQYV1uSQdGAFQZWw5gVipcMU4UCzREShlREkUPRQxOFnETfR57cHpWZVBkXm5Me1IVVV4ZVQxAHEkpSS9AbyRzRgY7Gi9mM3I5cTZqEh5lC2YKJhE3OgApGRJSdlcYMGkSdAB6GwkCLQJHdUl2TDsSQB1YGX4TQWILBgxrVn9VZFRiU2lDA0UDRghJHnIGdAlmCGpDMQYfMB9dLFUZXRwFY2ZkCAYvOTwQFiQGPg47E1gRFlYCWwQqRDJIOD49ASM4Jw4rFUZTFDUZWUkgUzdNZgpoQ3EMBS0RUAdFE0hYBQIHZBlmcGxCckd1CTgYNAVGDRZWYVsEFnlnDGlAbxEhAjE0PQhGF0cbWRRDOB5laGYKLQM8Fg54URBSFz9qJmcObwZiHAgfNnBHFEt2CzsdRxEWVgJbBDNYI14vDy8QOwg7NCwJQhcUVHhZDncGdx1wGX5aZFBZb0YCQANAAEsFYwVkCDwnPwo1R3UqdkxsSAdBAEUVQhN1HXYfeFZ4UmtVdEp7URMfXgFfCkowViAJZmtqQ2JQDm5JURUATw8aE3YXJx4qdH9VMlFsC25UOxVSQwRDAFsGYgsrRj4GPAE0DjFKeTATUwdAXU8WI1lyEXFIfFZhB1w7RAFFVUEBGB17RyFPf3N5QnBFdUshHi4YUFUWNwBbF3ZPcRQoB3hdZARiX2kSBRABRw4bGHlefREmTy1VY1FKeFMSUkQXVxIFY2ZkCHlhbEBwRycfNTI5GVpVFjcAW2oNeQ95D0BvR3NGIBg9Am0VQBxcWQ4BHmUbdBpyUzIHCGhIA0NXR11NQnIUdBF8eHkFMlI3X2BZbVAVVxZWVAlAMXU1SDkSJws8ODIeMRQTU3VUGR0WJV1yHnMYelplVQpvQAFBBBQIGEVwQyNKeXV-B2JedUt0THsieTVlI34qZBpnA2MePgwxBjMaJQsvUAdBAVcWcDJaN1suRCU9OQFKeDASUkMfXSYWIx50TXpwKAE1OTkeNFs0BU1CWhNAWwRgC2dbORUnAHNGFUp5FQsWV0MOTBxwB3EYJh17UGJXCWgRUkFTEFpIEXFCdhFpYW5CcBAnHiUEPlAVNBZWEkkUehskTylQdlRiBmQPbBYCQARNDEAbJ1xwS3Icf1VxREh4UUEWUB9dWAUCB2QfcXh.WmZSYFpiVWNBAU0DRRBKBGIJZwwvGT4NIB4KHytREzIUVAlOGHUJcxhzH35DcUZKeBVHUhc2GFhnDm8GYg&cks=M2NmMDhiYzg5MzQ0ODE1MmEzYmNhMDI2ZjNlNWVkMTQ&e=1.0"
-                                            }
-                                        },
-                                        "buttonText": {
-                                            "text": null,
-                                            "tracking": null
-                                        }
+                                    // The custom property value that you send to Paypal for a
+                                    // payment request is returned in Paypal's reponse.
+                                    custom: 'Custom data goes here!',
+                                    amount: {
+                                        total:
+                                            document.getElementById("itemPrice").innerHTML
+                                        , currency:
+                                            document.getElementById("currency").innerHTML
                                     }
-                                },
-                                "meta": {
-                                    "calc": "7c6e7bd068a00",
-                                    "rlog": "rZJvnqaaQhLn%2FnmWT8cSUueWscmrtUHe5Y1Bd%2FeqyvyOTq66rSXAciiXRg7dClMl1o2iporwJbYz7mI0k8X%2B5gW%2FmSA3nL13_185ea1558c9"
-                                },
-                                "server": "H5udlHda3E59NSYw3JHYoIqpRBdZmQxiWrYaB70sgRCgOSezUY6J8qS6kIomZBYCXaedQuzQblxi31AXwdx4VKVH-Xq5Z_4dcgkKHLc7B3lzKr_qcxjVX4LhrDecIA79VIl3TrQm-2LhzR4N7CZoxYyTECRRNVzO_CtBuupbifj2sans9sKNRkcUCL8RhbrUToL0-ipvKcD3-fvp6t1I6mNTfpfd9qrDwGyem4FeUPeYxjDf1At2i5unzWpvU1qqkFYNPcgbaiG"
-                            }, "buttonTypes");
-                        </script>
-                        <script nonce="">
-                            window.preloadComplete();
-                        </script>
-                        </head>
-                        <body class="dom-ready">
-                            <div id="paypal"></div>
-                        </body>
-                    </html>
+                                }]
+                            }
+                        });
+                    },
+                    onAuthorize: function (data, actions) {
+                        return actions.payment.execute().then(function (payment) {
+                            console.log("This is what comes back from Paypal: ")
+                            console.log(payment);
+                            alert("This JSON is from Paypal: " + JSON.stringify(payment));
+                            console.log("-------------------------------------")
+                            var dataObject = {
+                                "cart": payment.cart,
+                                "intent": payment.intent,
+                                "paymentID": payment.id,
+                                "create_time": payment.create_time,
+                                "paymentState": payment.state,
+                                "payerEmail": payment.payer.payer_info.email,
+                                "payerID": payment.payer.payer_info.payer_id,
+                                "payerFirstName": payment.payer.payer_info.first_name,
+                                "payerLastName": payment.payer.payer_info.last_name,
+                                "payerMiddleName": payment.payer.payer_info.middle_name,
+                                "payerCountryCode": payment.payer.payer_info.country_code,
+                                "paymentMethod": payment.payer.payment_method,
+                                "payerStatus": payment.payer.status,
+                                "amount": payment.transactions[0].amount.total,
+                                "currency": payment.transactions[0].amount.currency,
+                                "custom": payment.transactions[0].custom
+                            }
 
-                </div>
-            </div>
+                            // The payment is complete!
+                            // You can now show a confirmation message to the customer
+                            $.ajax({
+                                type: "post",
+                                url: "/Home/PaySuccess",
+                                data: JSON.stringify(dataObject),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+
+                                //after success
+                                success: function (msg) {
+                                    console.log("Data: " + JSON.stringify(data));
+                                    window.location.href
+                                        = "/Home/Confirmation?paymentID=" + data.paymentID;
+                                },
+                                //after fail
+                                error: function (msg) {
+                                    alert("fail: " + JSON.stringify(msg));
+                                }
+                            });
+                        })
+                    },
+                    onCancel: function (data, actions) {
+                        /*
+                        * Buyer cancelled the payment
+                        */
+                    },
+                }, '#paypal-button');
+            </script>
+
         </div>
-        
+       
         
     </main>
 </div>
+
+
+
+
