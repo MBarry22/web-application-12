@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WebApplication12.Data;
@@ -19,6 +20,7 @@ namespace WebApplication12.Controllers
 
         // Home page shows list of items.
         // Item price is set through the ViewBag.
+
         public IActionResult Index()
         {
             return View("Index", "3.55|CAD");
@@ -26,6 +28,7 @@ namespace WebApplication12.Controllers
 
         // Home page shows list of items.
         // Item price is set through the ViewBag.
+        [Authorize]
         public IActionResult Transactions()
         {
             DbSet<IPN> items = _context.IPNs;
