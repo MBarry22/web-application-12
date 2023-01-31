@@ -28,7 +28,8 @@ namespace WebApplication12.Controllers
 
         // Home page shows list of items.
         // Item price is set through the ViewBag.
-        [Authorize]
+        
+        [Authorize(Roles = "Manager")]
         public IActionResult Transactions()
         {
             DbSet<IPN> items = _context.IPNs;
@@ -62,6 +63,9 @@ namespace WebApplication12.Controllers
 
             return View("Confirmation", transaction);
         }
+
+
+
 
     }
 }

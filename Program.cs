@@ -1,8 +1,28 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplication12.Data;
+using WebApplication12.Services.rolesDemoSSD.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.Configure<IdentityOptions>(options => {
+    //// Password settings if you want to ensure password strength.
+    //options.Password.RequireDigit           = true;
+    //options.Password.RequiredLength         = 8;
+    //options.Password.RequireNonAlphanumeric = false;
+    //options.Password.RequireUppercase       = true;
+    //options.Password.RequireLowercase       = false;
+    //options.Password.RequiredUniqueChars    = 6;
+
+    // Lockout settings (Freeze 1 minute only to make testing easier)
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
+    options.Lockout.MaxFailedAccessAttempts = 3; // Lock after 
+                                                 // 3 consec failed logins
+    options.Lockout.AllowedForNewUsers = true;
+
+    // User settings
+    options.User.RequireUniqueEmail = true;
+});
+
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -12,9 +32,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddTransient<IEmailService, EmailService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
